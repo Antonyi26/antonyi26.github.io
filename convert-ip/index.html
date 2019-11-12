@@ -12,7 +12,6 @@
             body {
                 padding: 0;
                 margin: 0;
-                height: 100vh;
                 font-family: monospace;
                 font-size: 20px;
                 font-weight: 900;
@@ -35,33 +34,37 @@
                 width: 85%;
                 background: #e6e3df;
                 border-radius: 20px;
+                margin: 20px 0;
                 padding: 20px 50px;
                 box-sizing: border-box;
                 box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
             }
             
-            
-            #ip {
+            input[type="text"] {
                 margin: 0;
                 padding: 0 10px;
-                width: 100%;
-                height: 40px;
+                min-width: 150px;
                 box-sizing: border-box;
-                /*border: 1px solid black;*/
                 border-radius: 20px;
                 font-family: monospace;
-                font-size: 0.9rem;
-                box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1);
+                box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.4), 1px 1px 5px rgba(255, 255, 255, 1);                
+                transition: 0.2s;
+            }
+            input[type="text"]:hover {
+                border-color: red;
+            }
+            
+            
+            #ip {
+                width: 100%;
+                height: 40px;
+                font-size: 1.0rem;
+                
             }
             
             .output {
-                margin: 0;
-                padding: 0 10px;
-                box-sizing: border-box;
                 width: calc(100% - 100px);
                 height: 25px;
-                border-radius: 12px;
-                font-family: monospace;
                 font-size: 0.8rem;
             }
             
@@ -87,21 +90,12 @@
             }
             
             
-            input[type="text"] {
-                transition: 0.2s;
-            }
-            
-            
-            input[type="text"]:hover {
-                border-color: red;
-            }
-            
             .box {
                 background: #d5d2ce;
                 padding: 10px 20px;
                 margin: 20px 0;
                 display: flex;
-                flex-flow: column nowrap;
+                flex-flow: column wrap;
                 justify-content: center;
                 align-items: left;
                 /*border: 1px solid gray;*/
