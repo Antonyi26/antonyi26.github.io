@@ -1,0 +1,329 @@
+/* Общий макет (мобильная версия) */
+/*@import url('https://fonts.googleapis.com/css?family=Marmelad|Andika|Marck+Script&display=swap');*/
+@font-face {
+    font-family: Marmelad; /* Имя шрифта */
+    src: url("./font-google/Marmelad-Regular.ttf"); /* Путь к файлу со шрифтом */
+}
+@font-face {
+    font-family: Andika;
+    src: url("./font-google/Andika-Regular.ttf");
+}
+@font-face {
+    font-family: "Marck Script";
+    src: url("./font-google/MarckScript-Regular.ttf");
+}
+html, ul {
+    margin: 0;
+    padding: 0; 
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size:1.4rem;
+    font-family: 'Andika', sans-serif;
+}
+h1,
+h2,
+h3 {
+  text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+#main_header {
+    font-size:1.8rem;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+#main_header > h1 {
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+#main_header > video {
+    filter: brightness(75%);
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+#main_nav {
+    position: fixed;
+    height: 100vh;
+    width: 296px;
+    left: -300px;
+    bottom: 0;
+    background: black;
+    opacity: 0.9;
+    box-sizing: border-box;
+    transition: 0.5s;
+    padding-top: 30px;
+  }
+#menu_btn {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    right: -60px;
+    top: 60px;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+    background: black;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+    opacity: 0.9;
+    cursor: pointer;
+  }
+.menu_isOpen {
+    transform: translateX(300px);
+  }
+#main_nav > a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    margin: 0 40px;
+    padding: 10px 0 ;
+    border-bottom: 2px solid rgb(156, 156, 156);
+    color: white;
+    transition: 0.2s;
+}   
+#main_nav > a:hover {
+    color: red;
+}
+.box_photo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+    font-family: 'Marck Script', cursive;
+    position: absolute;
+    left: 0;
+    top: 30vh;
+    width: 100%;
+    color: white;
+    margin: 0;
+    padding: 0; 
+}
+.box_photo > h2 {
+    margin: 0;
+    padding: 0;
+}
+.photo {
+    box-sizing: border-box;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    background: center / cover no-repeat url("../img/anna.webp");
+}
+main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+.section_main {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #e8e8e8;
+}
+.section_main > h2 {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0;
+}
+.section_box {
+    text-align: center; 
+}
+.article_main {
+    text-align: center;
+    background: white;
+    width: 100%;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+.article_main > h3 {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+.article_box {
+    display: flex;
+    flex-flow: column nowrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Marmelad', sans-serif;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.article_box > img {
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.article_box > p {
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+.article_box > ul > li {
+    text-align: justify;
+    padding: 0;
+    margin: 30px 40px 30px 60px;
+}
+#skils, #diploms {
+    background: #8bc2a1;
+}
+#about, #edu {
+    background: #efc0ea;
+} 
+footer {
+    width: 100%;
+    background: rgba(88,88,88);
+    box-shadow: inset 0 14px 28px rgba(0,0,0,0.7);
+    text-align: center;
+    color: white;
+}
+footer h2 {
+    margin: 0;
+    padding: 0;
+}
+footer a {
+    color: #8bc2a1;
+    transition: 0.2s;
+}
+/*
+@media (min-width: 768px) {
+    body {
+        font-size:1.8rem;
+    }
+}
+*/
+@media (min-width: 768px) {
+/* Планшеты в режиме landscape, нетбуки, ноутбуки, десктоп. */
+    body {
+        font-size:1.2rem;
+    }
+    #menu_btn {
+        display: none;
+    }
+    #main_nav {
+        font-size:1.4rem;
+        transform: translateX(0);
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border: none;
+        display: flex;
+        width: 100%;
+        height: 100px;
+        justify-content: space-around;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        opacity: 0.6;
+    }
+    #main_nav > a {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+    .section_main {
+        padding: 20px 0;
+    }
+    .section_box {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+    .article_main {
+        border: none;
+        border-radius: 20px;
+        padding: 0;
+        margin: 20px 40px;
+        /*transition: 0.2s;*/
+    }
+    /*
+    .article_main:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+        transform: scale(1.02);
+    }
+    */
+    .article_box {
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+    }
+    .article_box > img {
+        width: 80%;
+        margin: 10px 20px;
+        padding: 0;
+        border-radius: 20px;
+    }
+    .article_box > ul {
+        width: 70%;
+    }
+    #edu .article_box, #diploms .article_box {
+        flex-flow: row wrap;
+    }
+    #edu .article_box img, #diploms .article_box img {
+        filter: grayscale(1);
+        transition: 0.2s;
+    }
+    #edu .article_box img:hover, #diploms .article_box img:hover {
+        filter: grayscale(0);
+    }
+    footer .article_box {
+        font-size:1.4rem;
+    }
+    footer a:hover {
+        color: #efc0ea;
+    }
+}
+
+@media (min-width: 1366px) {
+/* Десктоп с большими разрешениями, телевизоры. */
+    body {
+        font-size:1.2rem;
+    }
+    #main_nav {
+        font-size:2.0rem;
+    }
+    .article_main {
+        max-width: 1200px;
+    }
+    .article_box > img {
+        max-width: 500px;
+    }
+    footer .article_box {
+        font-size:1.6rem;
+    }
+}
+
+@media (min-height: 500px) {
+    .box_photo {
+        flex-direction: column;
+        top: 25vh;
+    }
+    .photo {
+        height: 300px;
+        width: 300px;
+    }
+}
