@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Игра Линии.</title>
+		
+		<style>
+			@keyframes pulse {
+				/*0%{ transform: scale(1.0); }*/
+				50%{ transform: scale(0.6); }
+				100%{ transform: scale(1.0); }
+			}
+			
+			@keyframes lost {
+				/*0%{ opacity: 1.0; }*/
+				100%{ opacity: 0.0; }
+			}
+			
+			/*
+			@-moz-keyframes pulse {
+				from { transform: scale(1.0); }
+				to { transform: scale(0.5); }
+			}
+			*/
+			
+			body {
+				margin: 0;
+				padding: 0;
+				font: bold 36px Arial;
+			}
+			
+			#score {
+				position: absolute;
+				top: 40px;
+				left: 50px;
+				height: 60px;
+				width: 720px;
+				background: #e6e3df;
+				border: 2px black solid;
+				border-top-left-radius: 50px;
+				border-top-right-radius: 50px;
+				margin: 0;
+				padding: 0;
+				text-align: center;
+			}
+			
+			#score > p {
+				margin: 10px;
+				padding: 0;				
+			}
+				
+			#map {
+				position: absolute;
+				top: 100px;
+				left: 50px;
+				width: 600px;
+				height: 600px;
+				background: #e6e3df;
+				border: 2px black solid;
+				margin: 0;
+				padding: 0;
+				box-shadow: 
+					0 1px 4px rgba(0, 0, 0, 0.3),
+					-23px 0px 20px -23px rgba(0, 0, 0, 0.8),
+					23px 0px 20px -23px rgba(0, 0, 0, 0.8),
+					0px 0px 40px -23px rgba(0, 0, 0, 0.1) inset
+				;	
+				
+			}
+			
+			.cell {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 50px;
+				height: 50px;
+				box-sizing: border-box;
+				padding: 0;
+				margin: 0;
+				border: 1px gray solid;
+				/* box-shadow: inset 2px 2px 2px 1px #000000; */				
+			}
+			
+			.cell:hover {
+				border: 1px red solid;
+			}
+			
+			.ball {
+				position: absolute;
+				top: 5%;
+				left: 5%;
+				width: 90%;
+				height: 90%;
+				border-radius: 50%;
+				background-color: none;
+				/*animation: pulse 2s infinite;*/
+				animation-name: none;
+				animation-duration: 0.5s;
+				animation-iteration-count: infinite;
+				/*-moz-animation: pulse 1s;*/
+				box-shadow: 3px 3px 2px #777777;
+				
+			}
+			
+		</style>
+		
+		<script defer src="map.js"></script>
+		<script defer src="lines.js"></script>
+		
+	</head>
+	
+	<body onload="init()">
+		<div id="score">
+			<p>Счёт: <span id="cnt_score">0</span></p>
+		</div>
+		<div id="map"></div>
+	</body>
+	
+</html>
