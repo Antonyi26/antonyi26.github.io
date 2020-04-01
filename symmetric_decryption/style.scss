@@ -1,0 +1,118 @@
+$lightblack: #505763;
+$lighttomato: rgb(252, 161, 161);
+$radius: 20px;
+$base-width: 90%;
+$remaind-width: 95% - $base-width;
+
+@import url('https://fonts.googleapis.com/css?family=Pangolin&display=swap');
+
+
+@mixin my-font($size) {
+    font-family: 'Pangolin', cursive;
+    font-size: $size;
+}
+
+@mixin margin-padding() {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin flex-column() {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background: $lightblack;
+}
+
+body {
+    padding: 20px 0;
+    //@include flex-column();
+}
+
+h3 {
+    grid-area: header;
+    margin: 10px auto;
+    padding: 0;
+    text-align: center;
+    @include my-font(20px);
+    //background-color: darken($lighttomato, 15%);
+    border-radius: $radius;
+}
+
+
+textarea, 
+input[type="number"],  
+input[type="text"]
+{
+    width: $base-width;
+    border-radius: $radius;
+    box-sizing: border-box;
+    margin: 10px 0;
+    padding: 10px 15px;
+    resize: none;
+
+    border: 1px solid #cccccc; //цвет рамки
+    //background: #ffffff; // желательно прописывать, так как в Chrome при сохранных данных оно может быть желтым
+    outline: none; // удаляет обводку в браузерах хром(желтая) и сафари(синяя)
+    height: 28px; // высота на свое усмотрение
+    color: $lightblack; //цвет шрифта в обычном состоянии
+    @include my-font(16px);
+}
+
+textarea {
+    min-height: 100px;
+}
+
+input[type="number"],
+input[type="text"] 
+{
+    height: 40px;
+    padding: 0 15px;
+}
+
+input[type="text"]:disabled,
+input[type="number"]:disabled
+{
+    background: $lighttomato;
+}
+
+.card {
+    display: grid; 
+    grid-template-areas: "header header"
+                         "inputs-card settings-card";
+    //grid-template-rows: 1fr 1fr; /* 2 строки */
+    grid-template-columns: 2fr 1fr; /* 2 столбца */
+    align-self: stretch;
+
+    margin: 0 auto;
+    padding: 20px 40px;
+    width: 90%;
+    box-sizing: border-box;
+    background: $lighttomato;
+    border-radius: $radius;
+}
+
+.inputs-card {
+    grid-area: inputs-card;
+    @include flex-column();
+    @include margin-padding();
+}
+
+.settings-card {
+    grid-area: settings-card;
+    @include flex-column();
+    @include margin-padding();
+    border: 1px solid $lightblack;
+    border-radius: $radius;
+
+    div {
+        @include my-font(16px);
+    }
+}

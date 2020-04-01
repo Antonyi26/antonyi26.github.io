@@ -1,0 +1,124 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Pangolin&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #505763;
+}
+
+body {
+  padding: 20px 0;
+}
+
+h3 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: header;
+  margin: 10px auto;
+  padding: 0;
+  text-align: center;
+  font-family: 'Pangolin', cursive;
+  font-size: 20px;
+  border-radius: 20px;
+}
+
+textarea,
+input[type="number"],
+input[type="text"] {
+  width: 90%;
+  border-radius: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 10px 0;
+  padding: 10px 15px;
+  resize: none;
+  border: 1px solid #cccccc;
+  outline: none;
+  height: 28px;
+  color: #505763;
+  font-family: 'Pangolin', cursive;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 100px;
+}
+
+input[type="number"],
+input[type="text"] {
+  height: 40px;
+  padding: 0 15px;
+}
+
+input[type="text"]:disabled,
+input[type="number"]:disabled {
+  background: #fca1a1;
+}
+
+.card {
+  display: -ms-grid;
+  display: grid;
+      grid-template-areas: "header header" "inputs-card settings-card";
+  -ms-grid-columns: 2fr 1fr;
+      grid-template-columns: 2fr 1fr;
+  /* 2 столбца */
+  -ms-grid-row-align: stretch;
+      align-self: stretch;
+  margin: 0 auto;
+  padding: 20px 40px;
+  width: 90%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background: #fca1a1;
+  border-radius: 20px;
+}
+
+.inputs-card {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: inputs-card;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.settings-card {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: settings-card;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #505763;
+  border-radius: 20px;
+}
+
+.settings-card div {
+  font-family: 'Pangolin', cursive;
+  font-size: 16px;
+}
