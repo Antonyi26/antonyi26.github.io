@@ -13,6 +13,7 @@ window.onload = function(event)
 	GAME.MAP.cnavasObj.onmouseout = mouseHandler.bind(GAME.MAP);
 	GAME.MAP.cnavasObj.onmouseover = mouseHandler.bind(GAME.MAP);
 	
+    // кнопка "Добавить игрока"
 	document.getElementById("player-add").onmousedown = function()
 	{
 		if (GAME.players.length < 4)
@@ -26,8 +27,10 @@ window.onload = function(event)
 				let id = GAME.players.length;
 				player = document.getElementById("player_" + id);
 				player.style.color = color;
-				player.style.borderColor = color;
 				player.innerHTML = name;
+                let score = document.getElementById("player_" + id + "_score");
+ 				score.style.color = color;
+				score.innerHTML = "0";               
 			}
 		}
 		else
@@ -37,12 +40,29 @@ window.onload = function(event)
 		document.getElementById("player-name").value = "";
 	};
 	
-	
+	// кнопка "Новая игра"
 	document.getElementById("new-game").onmousedown = function()
 	{
 		GAME.newGame();
 	};
 	
+    // кнопка "Бросить кубик"
+	document.getElementById("cubic-btn").onmousedown = function()
+	{
+        GAME.next();
+        
+        let el = document.getElementById("cubic-first-num");
+        el.style.color = GAME.currentPlayer().color;
+        el.innerHTML = randInt(1, 6);
+        
+        el = document.getElementById("cubic-second-num");
+        el.style.color = GAME.currentPlayer().color;
+        el.innerHTML = randInt(1, 6);
+        
+        el = document.getElementById("current-player");
+        el.style.color = GAME.currentPlayer().color;
+        el.innerHTML = GAME.currentPlayer().name;
+	};    
 	
 	window.onresize();
 };
@@ -52,6 +72,7 @@ function resizeHandler()
 	let wrapper = document.getElementById("wrapper");
 	let wrapperStyle = getComputedStyle(wrapper);
 	let size = parseFloat( wrapperStyle.height );
+    GAME.updateInfo();
 	GAME.MAP.resize(size, size);
 };
 
@@ -108,6 +129,12 @@ function mousePoint2cellIndex(event)
 	return ij;
 };
 
+function randInt(min, max) 
+{
+  // случайное число от min до (max+1)
+  let rand = min + Math.random() * (max + 1 - min);
+  return Math.floor(rand);
+};
 
 /* function drawMap()
 {

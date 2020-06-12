@@ -51,7 +51,7 @@
 				font: 14pt sans-serif;
 			}
 			span {
-				display: block;
+				display: inline-block;
 				margin: 5px;
 				padding: 0 10px;
 				font-size: 18pt;
@@ -72,10 +72,10 @@
 		<div id="info">
 			<div class="info-box">
 				Кто ходит:
-				<span class="player_color" id="current-player">######</span>
+				<div><span class="player_color" id="current-player">######</span></div>
 			</div>
 			<div class="info-box">
-				<input class="button" type="button" value="Бросить кубик">
+				<input class="button" id="cubic-btn" type="button" value="Бросить кубик">
 				<span class="player_color" id="cubic-first-num">#</span> 
 				<span class="player_color" id="cubic-second-num">#</span>
 			</div>
@@ -83,10 +83,22 @@
 				<input id="player-name" type="text">
 				<input id="player-color-select" class="button" type="color" value="#ff0000">
 				<input id="player-add" class="button" type="button" value="Добавить игрока">
-				<span class="player_color" id="player_1">######</span>
-				<span class="player_color" id="player_2">######</span>
-				<span class="player_color" id="player_3">######</span>
-				<span class="player_color" id="player_4">######</span>
+				<div>
+                    <span class="player_color" id="player_1">######</span>
+                    <span class="player_color" id="player_1_score">#</span>
+                </div>
+				<div>
+                    <span class="player_color" id="player_2">######</span>
+                    <span class="player_color" id="player_2_score">#</span>
+                </div>
+				<div>
+                    <span class="player_color" id="player_3">######</span>
+                    <span class="player_color" id="player_3_score">#</span>
+                </div>
+				<div>
+                    <span class="player_color" id="player_4">######</span>
+                    <span class="player_color" id="player_4_score">#</span>
+                </div>
 			</div>
 			<div class="info-box">
 				<input id="new-game" class="button" type="button" value="Нова игра">

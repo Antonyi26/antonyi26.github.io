@@ -14,7 +14,9 @@ class Game
 		for (let i = 0; i < this.players.length; i++)
 			this.players[i].score = 0;
 		// очищаем поле
-		this.MAP.resize();
+		this.MAP.clear();
+        this.updateInfo();
+        this.MAP.resize();
 	}
 	
 	addPlayer(player)
@@ -32,6 +34,15 @@ class Game
 		this.token++;
 		this.token = this.token % this.players.length;
 	}
+    
+    updateInfo()
+    {
+        for (let i = 0; i < this.players.length; i++)
+        {
+            let el = document.getElementById("player_" + (+i + 1) + "_score");
+            el.innerHTML = this.players[i].score;
+        }
+    }
 };
 
 class Player
@@ -42,4 +53,11 @@ class Player
 		this.color = color;
 		this.score = 0;
 	}
+    
+    addScore(num)
+    {
+        this.score += num;
+        if (this.score < 0)
+            this.score = 0;
+    }
 };

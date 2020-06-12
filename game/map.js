@@ -54,11 +54,8 @@ class Field
 	
 	resize(w, h)
 	{
-		if(!w) w = this.width;
-		if(!h) h = this.height;
-		
-		this.width = w;
-		this.height = h;
+        if (w) this.width = w;
+		if (h) this.height = h;
 		this.updateCells();
 		this.draw();
 	}
@@ -72,7 +69,18 @@ class Field
 				this.cellList[i][j].draw();
 			}
 		}
-	}	
+	}
+    
+    clear()
+    {
+		for (let i = 0; i < this.rows; i++)
+		{
+			for (let j = 0; j < this.cols; j++)
+			{
+				this.cellList[i][j].clear();
+			}
+		}        
+    }
 };
 
 // =================================================================== //
@@ -123,17 +131,25 @@ class Cell
 	
 	clicked()
 	{
+        if (this.owner)
+            return;
+        
 		let player = GAME.currentPlayer();
 		if (player)
 		{
 			this.owner = player;
 			this.backgroundColor = this.owner.color;
+            player.addScore(1);
 		}
 	}
 	
 	clear()
 	{
+        if (!this.owner)
+            return;
 		this.owner = undefined;
 		this.backgroundColor = this.fieldObj.backgroundColor;
+        let player = GAME.currentPlayer();
+        player.addScore(-1);
 	}
 };
