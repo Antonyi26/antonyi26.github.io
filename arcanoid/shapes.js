@@ -1,6 +1,6 @@
 class Shape
 {
-  topLeftPoint;
+  x; y;
   width;
   height;
   color;
@@ -8,14 +8,20 @@ class Shape
 
   constructor(x, y, width, height, color)
   {
-    this.topLeftPoint = {
-      x: x,
-      y: y,
-    };
+    this.x = x;
+    this.y = y;
     this.width = width;
     this.height = height;
     this.color = color;
     this.filled = false;
+  }
+
+  get centr()
+  {
+    return {
+      x: this.x + this.width/2, 
+      y: this.y + this.height/2
+    };
   }
 
   draw()
@@ -24,14 +30,20 @@ class Shape
     let offset = 5;
     ctx.strokeStyle = "yellow";
     ctx.strokeRect(
-      this.topLeftPoint.x - offset, 
-      this.topLeftPoint.y - offset, 
+      this.x - offset, 
+      this.y - offset, 
       this.width + offset * 2, 
       this.height + offset * 2
     );
   }
+
+  update()
+  {
+    
+  }
 };
 
+// ================================================ //
 
 class Rect extends Shape
 {
@@ -49,29 +61,31 @@ class Rect extends Shape
     
     if (this.filled)
     {
-      ctx.fillRect(this.topLeftPoint.x, this.topLeftPoint.y, this.width, this.height);
+      ctx.fillRect(this.x, this.y, this.width, this.height);
     }
     else
     {
-      ctx.strokeRect(this.topLeftPoint.x, this.topLeftPoint.y, this.width, this.height);
+      ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
   }
 };
 
+// ================================================ //
+
 class Circle extends Shape
 {
-  center;
   radius;
 
   constructor(centerX, centerY, radius, color)
   {
     let len = radius * 2;
     super(centerX - radius, centerY - radius, len, len, color);
-    this.center = {
-      x: centerX,
-      y: centerY,
-    };
     this.radius = radius;
+  }
+
+  update()
+  {
+    //this.x += 0.2;
   }
 
   draw()
@@ -82,8 +96,8 @@ class Circle extends Shape
     ctx.strokeStyle = this.color;
     ctx.beginPath();
     ctx.arc(
-      this.center.x, 
-      this.center.y, 
+      this.x + this.radius, 
+      this.y + this.radius, 
       this.radius, 
       0, Math.PI * 2, 
       false

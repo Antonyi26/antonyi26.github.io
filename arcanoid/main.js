@@ -50,11 +50,32 @@ class Game
     );
   }
 
+  static update()
+  {
+    Game.platform.update();
+    Game.ball.update();    
+  }
+
+  static render()
+  {
+    Canvas.clear();
+    Game.platform.draw();
+    Game.ball.draw();
+  }
+
+  static run()
+  {
+    window.requestAnimationFrame(() => {
+      Game.update();
+      Game.render();
+      Game.run();
+    });
+  }
+
   static start()
   {
     Game.init();
-    Game.platform.draw();
-    Game.ball.draw();
+    Game.run();
   }
 };
 
