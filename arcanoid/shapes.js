@@ -41,6 +41,15 @@ class Shape
       this.height + offset * 2
     );
   }
+
+  isCollision(shapeObj)
+  {
+    let top = this.y <= shapeObj.y + shapeObj.height;
+    let right = this.x + this.width >= shapeObj.x;
+    let bottom = this.y + this.height >= shapeObj.y;
+    let left = this.x <= shapeObj.x + shapeObj.width;
+    return top && right && bottom && left;
+  }
 };
 
 // ================================================ //
@@ -48,33 +57,27 @@ class Shape
 class MovedShape extends Shape
 {
   dx; dy;
-  speed;
+  speedX;
+  speedY;
 
   constructor(shapeObj)
   {
     shapeObj = Object.assign({
-      speed: 0,
+      speedX: 0,
+      speedY: 0,
     }, shapeObj);
 
     super(shapeObj);
-    this.speed = shapeObj.speed;
-    this.dx = shapeObj.speed;
-    this.dy = shapeObj.speed;
+    this.speedX = shapeObj.speedX;
+    this.speedY = shapeObj.speedY;
+    this.dx = 0;
+    this.dy = 0;
   }
 
   update() 
   {
     this.x += this.dx;
-    if (this.x + this.width > Canvas.width || this.x < 0)
-    {
-      this.dx = -this.dx;
-    }
-
     this.y += this.dy;
-    if (this.y + this.height > Canvas.height || this.y < 0)
-    {
-      this.dy = -this.dy;
-    }
   }
 };
 
@@ -106,17 +109,17 @@ class Rect extends MovedShape
 
   update()
   {
-    //super.update();
-    this.x = this.dx;
-    if (this.x + this.width > Canvas.width)
+    super.update();
+
+    if (this.x > Canvas.width - this.width)
     {
       this.x = Canvas.width - this.width;
+      this.dx = 0;
     }
-
-    this.y = this.dy;
-    if (this.y + this.height > Canvas.height)
+    else if (this.x < 0)
     {
-      this.y = Canvas.height - this.height;
+      this.x = 0;
+      this.dx = 0;
     }
   }
 };
@@ -126,6 +129,7 @@ class Rect extends MovedShape
 class Circle extends MovedShape
 {
   radius;
+  collided;
 
   constructor(circleObj)
   {
@@ -137,11 +141,21 @@ class Circle extends MovedShape
     }, circleObj);
     super(shapeObj);
     this.radius = circleObj.radius;
+    this.collided = false;
   }
 
   update()
   {
     super.update();
+
+    if (this.x > Canvas.width - this.width || this.x < 0)
+    {
+      this.dx = -this.dx;
+    }
+    if (this.y > Canvas.height - this.height || this.y < 0)
+    {
+      this.dy = -this.dy;
+    }
   }
 
   draw()

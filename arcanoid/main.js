@@ -1,3 +1,10 @@
+const KEYS = {
+  LEFT: 37,
+  UP: 38,
+  RIGHT: 39,
+  DOWN: 40,
+};
+
 class Canvas
 {
   static center;
@@ -38,28 +45,51 @@ class Game
 
     Game.platform = new Rect({
       x: Canvas.center.x,
-      y: Canvas.center.y,
+      y: Canvas.height * 0.8,
       width: 100,
       height: 20,
       color: "#ff000088",
+      speedX: 5,
     });
 
     Game.ball = new Circle({
       centerX: Canvas.center.x,
       centerY: Canvas.center.y,
-      radius: 20,
+      radius: 10,
       color: "#0000ff88",
-      speed: 2,
+      speedX: 2,
+      speedY: 3,
     });
+    Game.ball.dx = Game.ball.speedX;
+    Game.ball.dy = Game.ball.speedY;
 
     Game.setEvents();
   }
 
   static setEvents()
   {
-    Canvas.htmlObj.addEventListener("mousemove", (e) => {
-      Game.platform.dx = e.clientX;
-      Game.platform.dy = e.clientY;
+    window.focus();
+
+    window.addEventListener("keydown", (e) => {
+      switch (e.keyCode)
+      {
+        case KEYS.LEFT:
+          Game.platform.dx = -Game.platform.speedX;
+          break;
+        case KEYS.RIGHT:
+          Game.platform.dx = Game.platform.speedX;
+          break;          
+      }
+    });
+
+    window.addEventListener("keyup", (e) => {
+      switch (e.keyCode)
+      {
+        case KEYS.LEFT:
+        case KEYS.RIGHT:
+          Game.platform.dx = 0;
+          break;      
+      }
     });
   }
 
@@ -67,6 +97,22 @@ class Game
   {
     Game.platform.update();
     Game.ball.update();
+
+    if (Game.ball.isCollision(Game.platform))
+    {
+      //console.log("collision!!!");
+      if (!Game.ball.collided)
+      {
+        Game.ball.collided = true;
+        Game.ball.dy = -Game.ball.dy;
+        let k = Game.ball.dx * Game.platform.dx < 0 ? 2 : 4;
+        Game.ball.dx += Game.platform.dx / k;
+      }
+    }
+    else
+    {
+      Game.ball.collided = false;
+    }
   }
 
   static render()
