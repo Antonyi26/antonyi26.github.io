@@ -35,25 +35,38 @@ class Game
   static init()
   {
     Canvas.init();
-    Game.platform = new Rect(
-      Canvas.center.x,
-      Canvas.center.y,
-      100,
-      20,
-      "#ff000088"
-    );
-    Game.ball = new Circle(
-      Canvas.center.x,
-      Canvas.center.y,
-      100,
-      "#00ff0088"
-    );
+
+    Game.platform = new Rect({
+      x: Canvas.center.x,
+      y: Canvas.center.y,
+      width: 100,
+      height: 20,
+      color: "#ff000088",
+    });
+
+    Game.ball = new Circle({
+      centerX: Canvas.center.x,
+      centerY: Canvas.center.y,
+      radius: 20,
+      color: "#0000ff88",
+      speed: 2,
+    });
+
+    Game.setEvents();
+  }
+
+  static setEvents()
+  {
+    Canvas.htmlObj.addEventListener("mousemove", (e) => {
+      Game.platform.dx = e.clientX;
+      Game.platform.dy = e.clientY;
+    });
   }
 
   static update()
   {
     Game.platform.update();
-    Game.ball.update();    
+    Game.ball.update();
   }
 
   static render()

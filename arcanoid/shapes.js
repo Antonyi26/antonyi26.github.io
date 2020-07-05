@@ -6,14 +6,19 @@ class Shape
   color;
   filled;
 
-  constructor(x, y, width, height, color)
+  constructor(shapeObj)
   {
-    this.x = x;
-    this.y = y;
-    this.width = width;
-    this.height = height;
-    this.color = color;
-    this.filled = false;
+    shapeObj = Object.assign({
+      color: "black",
+      filled: true,
+    }, shapeObj);
+
+    this.x = shapeObj.x;
+    this.y = shapeObj.y;
+    this.width = shapeObj.width;
+    this.height = shapeObj.height;
+    this.color = shapeObj.color;
+    this.filled = shapeObj.filled;
   }
 
   get centr()
@@ -36,20 +41,50 @@ class Shape
       this.height + offset * 2
     );
   }
+};
 
-  update()
+// ================================================ //
+
+class MovedShape extends Shape
+{
+  dx; dy;
+  speed;
+
+  constructor(shapeObj)
   {
-    
+    shapeObj = Object.assign({
+      speed: 0,
+    }, shapeObj);
+
+    super(shapeObj);
+    this.speed = shapeObj.speed;
+    this.dx = shapeObj.speed;
+    this.dy = shapeObj.speed;
+  }
+
+  update() 
+  {
+    this.x += this.dx;
+    if (this.x + this.width > Canvas.width || this.x < 0)
+    {
+      this.dx = -this.dx;
+    }
+
+    this.y += this.dy;
+    if (this.y + this.height > Canvas.height || this.y < 0)
+    {
+      this.dy = -this.dy;
+    }
   }
 };
 
 // ================================================ //
 
-class Rect extends Shape
+class Rect extends MovedShape
 {
-  constructor(x, y, width, height, color)
+  constructor(rectObj)
   {
-    super(x, y, width, height, color);
+    super(rectObj);
   }
 
   draw()
@@ -68,24 +103,45 @@ class Rect extends Shape
       ctx.strokeRect(this.x, this.y, this.width, this.height);
     }
   }
+
+  update()
+  {
+    //super.update();
+    this.x = this.dx;
+    if (this.x + this.width > Canvas.width)
+    {
+      this.x = Canvas.width - this.width;
+    }
+
+    this.y = this.dy;
+    if (this.y + this.height > Canvas.height)
+    {
+      this.y = Canvas.height - this.height;
+    }
+  }
 };
 
 // ================================================ //
 
-class Circle extends Shape
+class Circle extends MovedShape
 {
   radius;
 
-  constructor(centerX, centerY, radius, color)
+  constructor(circleObj)
   {
-    let len = radius * 2;
-    super(centerX - radius, centerY - radius, len, len, color);
-    this.radius = radius;
+    let shapeObj = Object.assign({
+      x: circleObj.centerX - circleObj.radius,
+      y: circleObj.centerY - circleObj.radius,
+      width: circleObj.radius * 2,
+      height: circleObj.radius * 2,
+    }, circleObj);
+    super(shapeObj);
+    this.radius = circleObj.radius;
   }
 
   update()
   {
-    //this.x += 0.2;
+    super.update();
   }
 
   draw()
