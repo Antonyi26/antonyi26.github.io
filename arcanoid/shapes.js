@@ -21,7 +21,7 @@ class Shape
     this.filled = shapeObj.filled;
   }
 
-  get centr()
+  get center()
   {
     return {
       x: this.x + this.width/2, 
@@ -32,14 +32,8 @@ class Shape
   draw()
   {
     let ctx = Canvas.context;
-    let offset = 5;
-    ctx.strokeStyle = "yellow";
-    ctx.strokeRect(
-      this.x - offset, 
-      this.y - offset, 
-      this.width + offset * 2, 
-      this.height + offset * 2
-    );
+    ctx.strokeStyle = this.color;
+    ctx.fillStyle = this.color;
   }
 
   isCollision(shapeObj)
@@ -57,46 +51,41 @@ class Shape
 class MovedShape extends Shape
 {
   dx; dy;
-  speedX;
-  speedY;
 
   constructor(shapeObj)
   {
     shapeObj = Object.assign({
-      speedX: 0,
-      speedY: 0,
+      dx: 0,
+      dy: 0,
     }, shapeObj);
 
     super(shapeObj);
-    this.speedX = shapeObj.speedX;
-    this.speedY = shapeObj.speedY;
-    this.dx = 0;
-    this.dy = 0;
+    this.dx = shapeObj.dx;
+    this.dy = shapeObj.dy;
   }
 
-  update() 
-  {
-    this.x += this.dx;
-    this.y += this.dy;
-  }
+  // update() 
+  // {
+  //   this.x += this.dx;
+  //   this.y += this.dy;
+  // }
 };
 
 // ================================================ //
 
 class Rect extends MovedShape
 {
-  constructor(rectObj)
-  {
-    super(rectObj);
-  }
+  // constructor(rectObj)
+  // {
+  //   super(rectObj);
+  // }
 
   draw()
   {
-    //super.draw();
+    super.draw();
     let ctx = Canvas.context;
-    ctx.fillStyle = this.color;
-    ctx.strokeStyle = this.color;
-    
+    // ctx.fillStyle = this.color;
+    // ctx.strokeStyle = this.color;
     if (this.filled)
     {
       ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -109,17 +98,14 @@ class Rect extends MovedShape
 
   update()
   {
-    super.update();
-
+    this.x = this.dx;
     if (this.x > Canvas.width - this.width)
     {
       this.x = Canvas.width - this.width;
-      this.dx = 0;
     }
     else if (this.x < 0)
     {
       this.x = 0;
-      this.dx = 0;
     }
   }
 };
@@ -146,12 +132,13 @@ class Circle extends MovedShape
 
   update()
   {
-    super.update();
-
+    this.x += this.dx;
     if (this.x > Canvas.width - this.width || this.x < 0)
     {
       this.dx = -this.dx;
     }
+
+    this.y += this.dy;
     if (this.y > Canvas.height - this.height || this.y < 0)
     {
       this.dy = -this.dy;
@@ -160,10 +147,10 @@ class Circle extends MovedShape
 
   draw()
   {
-    //super.draw();
+    super.draw();
     let ctx = Canvas.context;
-    ctx.fillStyle = this.color;
-    ctx.strokeStyle = this.color;
+    //ctx.fillStyle = this.color;
+    //ctx.strokeStyle = this.color;
     ctx.beginPath();
     ctx.arc(
       this.x + this.radius, 

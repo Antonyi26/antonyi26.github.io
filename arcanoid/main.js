@@ -49,7 +49,6 @@ class Game
       width: 100,
       height: 20,
       color: "#ff000088",
-      speedX: 5,
     });
 
     Game.ball = new Circle({
@@ -57,40 +56,30 @@ class Game
       centerY: Canvas.center.y,
       radius: 10,
       color: "#0000ff88",
-      speedX: 2,
-      speedY: 3,
+      dx: 2,
+      dy: 3,
     });
-    Game.ball.dx = Game.ball.speedX;
-    Game.ball.dy = Game.ball.speedY;
 
     Game.setEvents();
   }
 
   static setEvents()
   {
-    window.focus();
-
-    window.addEventListener("keydown", (e) => {
-      switch (e.keyCode)
-      {
-        case KEYS.LEFT:
-          Game.platform.dx = -Game.platform.speedX;
-          break;
-        case KEYS.RIGHT:
-          Game.platform.dx = Game.platform.speedX;
-          break;          
-      }
+    Canvas.htmlObj.focus();
+    Canvas.htmlObj.addEventListener("mousemove", (e) => {
+      Game.platform.dx = e.clientX;
     });
-
-    window.addEventListener("keyup", (e) => {
-      switch (e.keyCode)
-      {
-        case KEYS.LEFT:
-        case KEYS.RIGHT:
-          Game.platform.dx = 0;
-          break;      
-      }
-    });
+    // window.addEventListener("keydown", (e) => {
+    //   switch (e.keyCode)
+    //   {
+    //     case KEYS.LEFT:
+    //       Game.platform.dx = -Game.platform.speedX;
+    //       break;
+    //     case KEYS.RIGHT:
+    //       Game.platform.dx = Game.platform.speedX;
+    //       break;          
+    //   }
+    // });
   }
 
   static update()
@@ -105,8 +94,6 @@ class Game
       {
         Game.ball.collided = true;
         Game.ball.dy = -Game.ball.dy;
-        let k = Game.ball.dx * Game.platform.dx < 0 ? 2 : 4;
-        Game.ball.dx += Game.platform.dx / k;
       }
     }
     else
