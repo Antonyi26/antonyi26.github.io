@@ -56,8 +56,8 @@ class Game
       centerY: Canvas.center.y,
       radius: 10,
       color: "#0000ff88",
-      dx: 2,
-      dy: 3,
+      dx: 5,
+      dy: 5,
     });
 
     Game.setEvents();
